@@ -39,20 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void _fetchWeather() {
     setState(() {
       _cityName = _cityController.text;
-      // Simulation
-      int temp = _generateRandomTemperature();
-      _temperature = '${temp}°C';
+      _temperature = '${_generateRandomTemperature()}°C';
       _weatherCondition = _getRandomWeatherCondition();
     });
   }
 
-  // Gen random temperature between 15°C and 30°C
   int _generateRandomTemperature() {
     Random random = Random();
-    return 15 + random.nextInt(16); // Between 16 and 30
+    return 15 + random.nextInt(16);
   }
 
-  // random weather condition: sunny, cloudy, or rainy
   String _getRandomWeatherCondition() {
     List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
     Random random = Random();
