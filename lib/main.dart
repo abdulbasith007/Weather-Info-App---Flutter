@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Weather Fetcher'),
+      home: const MyHomePage(title: 'Flutter Weather App'),
     );
   }
 }
@@ -33,8 +33,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _cityController = TextEditingController();
   String _cityName = '';
-  String _temperature = 'N/A';
-  String _weatherCondition = 'N/A';
+  String _temperature = '';
+  String _weatherCondition = '';
 
   void _fetchWeather() {
     setState(() {
