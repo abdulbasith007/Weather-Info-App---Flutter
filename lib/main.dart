@@ -35,12 +35,26 @@ class _MyHomePageState extends State<MyHomePage> {
   String _cityName = '';
   String _temperature = '';
   String _weatherCondition = '';
+  List<Map<String, String>> _sevenDayForecast = [];
 
   void _fetchWeather() {
     setState(() {
       _cityName = _cityController.text;
       _temperature = '${_generateRandomTemperature()}°C';
       _weatherCondition = _getRandomWeatherCondition();
+    });
+  }
+
+  void _fetchSevenDayForecast() {
+    setState(() {
+      _sevenDayForecast = List.generate(7, (index) {
+        int temp = _generateRandomTemperature();
+        return {
+          'day': 'Day ${index + 1}',
+          'temperature': '${temp}°C',
+          'condition': _getRandomWeatherCondition(),
+        };
+      });
     });
   }
 
@@ -92,6 +106,27 @@ class _MyHomePageState extends State<MyHomePage> {
               'Condition: $_weatherCondition',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _fetchSevenDayForecast,
+              child: const Text('7-Day Forecast'),
+            ),
+            const SizedBox(height: 20),
+            _sevenDayForecast.isNotEmpty
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: _sevenDayForecast.length,
+                      itemBuilder: (context, index) {
+                        final forecast = _sevenDayForecast[index];
+                        return ListTile(
+                          title: Text(forecast['day']!),
+                          subtitle: Text(
+                              'Temp: ${forecast['temperature']}, Condition: ${forecast['condition']}'),
+                        );
+                      },
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),
