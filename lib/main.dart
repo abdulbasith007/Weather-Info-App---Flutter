@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Map<String, String>> _sevenDayForecast = [];
 
   void _fetchWeather() {
+    if (_cityController.text.isEmpty) return;
     setState(() {
       _cityName = _cityController.text;
       _temperature = '${_generateRandomTemperature()}°C';
